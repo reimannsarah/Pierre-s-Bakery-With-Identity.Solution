@@ -1,0 +1,11 @@
+@{
+  Layout ="_Layout";
+}
+
+@model Bakery.Models.Treat
+@using Bakery.Models
+
+<h2>@Html.DisplayFor(model => model.Name)</h2>
+<p>@Html.ActionLink("Add a flavor", "AddFlavor", new { id = Model.TreatId })</p>
+<p>@Html.ActionLink("Edit", "Edit", new { id = Model.TreatId })</p>
+<p>@Html.ActionLink("Delete", "Delete", new { id = Model.TreatId })</p>
