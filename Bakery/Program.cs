@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Library.Models;
+using Bakery.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace Library
+namespace Bakery
 {
   class Program
   {
@@ -15,7 +15,7 @@ namespace Library
 
       builder.Services.AddControllersWithViews();
 
-      builder.Services.AddDbContext<LibraryContext>(
+      builder.Services.AddDbContext<BakeryContext>(
                         dbContextOptions => dbContextOptions
                           .UseMySql(
                             builder.Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(builder.Configuration["ConnectionStrings:DefaultConnection"]
@@ -24,7 +24,7 @@ namespace Library
                       );
       
       builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-          .AddEntityFrameworkStores<LibraryContext>()
+          .AddEntityFrameworkStores<BakeryContext>()
           .AddDefaultTokenProviders();
 
       builder.Services.Configure<IdentityOptions>(options =>
