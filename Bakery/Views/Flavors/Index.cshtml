@@ -10,7 +10,7 @@
 {
   <p>No flavors added yet</p>
 }
-@foreach (var flavor in Model)
+@foreach (Flavor flavor in Model)
 {
   <p>@Html.ActionLink($"{flavor.Name}", "Details", new { id = flavor.FlavorId }) </p>
 }

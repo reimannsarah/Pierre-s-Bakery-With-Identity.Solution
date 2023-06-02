@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Bakery.Models;
 using System.Collections.Generic;
@@ -43,7 +44,10 @@ public class TreatsController : Controller
     
   public ActionResult Details(int id)
   {
-    Treat thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+    Treat thisTreat = _db.Treats
+                                .Include(treat => treat.JoinEntities)
+                                .ThenInclude(join => join.Flavor)
+                                .FirstOrDefault(treat => treat.TreatId == id);
     return View(thisTreat);
   }
 
@@ -96,4 +100,13 @@ public class TreatsController : Controller
     _db.SaveChanges();
     return RedirectToAction("Index");
   }
+
+      [HttpPost]
+    public ActionResult DeleteJoin(int joinId)
+    {
+      FlavorTreat joinEntry = _db.FlavorTreats.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
+      _db.FlavorTreats.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
 } 

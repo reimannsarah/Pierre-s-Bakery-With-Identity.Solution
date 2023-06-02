@@ -6,6 +6,24 @@
 @using Bakery.Models
 
 <h2>@Html.DisplayFor(model => model.Name)</h2>
+
+<h4>Treats:</h4>
+
+@if (Model.JoinEntities.Count == 0)
+{
+  <p>No treats added to this flavor</p>
+}
+<ul>
+  @foreach(FlavorTreat join in Model.JoinEntities)
+  {
+    <li>@Html.ActionLink($"{join.Treat.Name}", "Details", "Treats", new { id =join.Treat.TreatId })</li>
+    @using(Html.BeginForm())
+    {
+      @Html.Hidden("joinId", @join.FlavorTreatId)
+      <input type="submit" value="Remove this treat" />
+    }
+  }
+</ul>
 <p>@Html.ActionLink("Add a treat", "AddTreat", new { id = Model.FlavorId })</p>
 <p>@Html.ActionLink("Edit", "Edit", new { id = Model.FlavorId })</p>
 <p>@Html.ActionLink("Delete", "Delete", new { id = Model.FlavorId })</p>
