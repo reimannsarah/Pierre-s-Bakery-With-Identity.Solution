@@ -54,6 +54,7 @@ public class FlavorsController : Controller
     return View(thisFlavor);
   }
 
+[Authorize]
   public ActionResult AddTreat(int id)
   {
     Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
@@ -61,6 +62,7 @@ public class FlavorsController : Controller
     return View(thisFlavor);
   }
 
+[Authorize]
   [HttpPost]
   public ActionResult AddTreat(Flavor flavor, int treatId)
   {
@@ -75,12 +77,14 @@ public class FlavorsController : Controller
     return RedirectToAction("Details", new { id = flavor.FlavorId });
   }
 
+[Authorize]
   public ActionResult Edit(int id)
   {
     Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
     return View(thisFlavor);
   }
 
+[Authorize]
   [HttpPost]
   public ActionResult Edit(Flavor flavor)
   {
@@ -89,12 +93,14 @@ public class FlavorsController : Controller
     return RedirectToAction("Index");
   }
 
+[Authorize]
   public ActionResult Delete(int id)
   {
     Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
     return View(thisFlavor);
   } 
 
+[Authorize]
   [HttpPost, ActionName("Delete")]
   public ActionResult DeleteConfirmed(int id)
   {
@@ -104,6 +110,7 @@ public class FlavorsController : Controller
     return RedirectToAction("Index");
   }
 
+[Authorize]
   [HttpPost]
   public ActionResult DeleteJoin(int joinId)
   {
