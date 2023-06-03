@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Bakery.Models;
 using System.Collections.Generic;
@@ -22,11 +23,13 @@ public class TreatsController : Controller
     return View(model);
   }
 
+[Authorize]
   public ActionResult Create()
   {
     return View();
   }
 
+[Authorize]
   [HttpPost]
   public ActionResult Create(Treat treat)
   {
