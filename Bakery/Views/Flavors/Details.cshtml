@@ -17,7 +17,7 @@
   @foreach(FlavorTreat join in Model.JoinEntities)
   {
     <li>@Html.ActionLink($"{join.Treat.Name}", "Details", "Treats", new { id =join.Treat.TreatId })</li>
-    @using(Html.BeginForm())
+    @using(Html.BeginForm("DeleteJoin", "Flavors"))
     {
       @Html.Hidden("joinId", @join.FlavorTreatId)
       <input type="submit" value="Remove this treat" />
